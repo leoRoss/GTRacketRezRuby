@@ -1,0 +1,9 @@
+<h1>Display the currently selected Reservation</h1>
+<p>GTID: <%= @reservation.gtid %></p>
+<p>Name: <%= @reservation.name %></p>
+More stuff, can edit in views/reservations/show.html.erb
+<br>
+<br>
+
+<%= link_to 'All Res', reservations_path %>
+<%= link_to 'Edit', edit_reservation_path(@reservation) %>
