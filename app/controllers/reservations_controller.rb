@@ -45,9 +45,7 @@ class ReservationsController < ApplicationController
 
   private
   def cleaned_res_params
-    params.require(:reservation).permit(:name,:phone,:start,:duration,:court,:rackets,:goggles,:ball,:guest1,:guest2,:guest3)
-    
-    #as convert what needs to be an integer to an integer
+    params.require(:reservation).permit(:name,:phone,:start,:duration,:court,:gtid,:gtuser,:email,:guest1,:guest2,:guest3)
   end
 
 end

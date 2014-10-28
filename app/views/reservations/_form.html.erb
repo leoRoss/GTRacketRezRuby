@@ -13,7 +13,6 @@
   <% end %>
   
   <p><b>Required</b></p>
-  <p> GTID: <%= form.text_field :gtid %> </p> 
   <p> Name: <%= form.text_field :name %> </p>
   <p> Phone #: <%= form.text_field :phone %> </p> 
   <p> Start Time:  <%= form.text_field :start %> , lets preset this with the time that was clicked on, and no longer have it changeable</p>
@@ -21,6 +20,9 @@
   <p> Court: <%= form.text_field :court %> lets preset this with the clicked time and make it no longer changeable </p> 
   <p>
   <p><b>Optional</b></p>
+  <p> GTID: <%= form.text_field :gtid %> </p> 
+  <p> GTUserName: <%= form.text_field :gtuser %> ex: gbrudell3</p> 
+  <p> Email: <%= form.text_field :email %> (confirmations and reminders)</p> 
   <p> Guests: </p>
   <p> <%= form.text_field :guest1 %> </p> 
   <p> <%= form.text_field :guest2 %> </p> 
