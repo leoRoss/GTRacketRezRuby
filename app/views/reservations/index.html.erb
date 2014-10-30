@@ -1,10 +1,21 @@
-<h1>All Reservations</h1>
-<p>Find me in app/views/reservations/index.html.erb</p>
-<p> We can use get all the articles a variable array.
-<p> For example, there are <%= @reservations.count %> reservations in the database!
-<p> This is erb, which is interplated ruby. However, views in Ruby can be made with javascript, coffeescript, and lots of other cool stuff. Just pick your desired extension
-<p> This page is the same as localhost:3000/reservations, since I set up the root of the web app in config/routes.rb 
-<p>
-<p>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">CRC Reservations</a>
 
-<%= link_to 'Create New Res', new_reservation_path %>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">[username] <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<%= button_to 'Create New Res', new_reservation_path, :class => "btn btn-primary btn-lg" %>
+
+<div id='calendar'></div>

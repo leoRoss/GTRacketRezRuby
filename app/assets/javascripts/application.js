@@ -11,6 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require moment
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
+//= require fullcalendar
 //= require_tree .
