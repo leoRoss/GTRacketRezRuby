@@ -22,3 +22,11 @@ $(document).ready ->
 		hiddenDays: hideDays,
 		height: 'auto',
 		header: false
+
+	$('#datetime').datetimepicker
+		enabledDates: [
+      moment(today),
+      moment(today).add(1, 'days'),
+      moment(today).add(2, 'days')
+    ],
+    minuteStepping: 15
