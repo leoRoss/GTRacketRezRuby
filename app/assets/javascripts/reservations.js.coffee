@@ -21,7 +21,29 @@ $(document).ready ->
 		slotDuration: moment.duration("00:15:00"),
 		hiddenDays: hideDays,
 		height: 'auto',
-		header: false
+		header: false,
+		events: [
+			{
+				title: 'Reserved Block',
+				start: '2014-11-01T11:30:00'
+				end: '2014-11-01T12:30:00'
+			},
+			{
+				title: 'Reserved Block',
+				start: '2014-10-31T14:00:00'
+				end: '2014-10-31T15:00:00'
+			},
+			{
+				title: 'Reserved Block',
+				start: '2014-11-02T09:15:00'
+				end: '2014-11-02T10:15:00'
+			},
+			{
+				title: 'Reserved Block',
+				start: '2014-10-31T17:45:00'
+				end: '2014-10-31T18:45:00'
+			}
+		]
 
 	$('#datetime').datetimepicker
 		enabledDates: [
