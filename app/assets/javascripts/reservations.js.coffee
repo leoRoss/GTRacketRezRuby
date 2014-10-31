@@ -4,13 +4,13 @@
 
 $(document).ready ->
 	today = moment()
-	diff = moment().diff(moment().startOf('week'),'days')
+	dayOfWeek = moment().diff(moment().startOf('week'),'days')
 
 	# hack to get the correct days to display
 	hideDays = []
-	for i in [0..6]
+	for i in [0..7]
 		do (i) ->
-			if i < diff or i > diff+2
+			unless i == dayOfWeek or i == (dayOfWeek + 1) % 7 or i == (dayOfWeek + 2) % 7
 				hideDays.push(i)
 
 	$('#calendar').fullCalendar
