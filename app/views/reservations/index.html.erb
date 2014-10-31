@@ -16,6 +16,103 @@
   </div>
 </nav>
 
-<%= button_to 'Create New Res', new_reservation_path, :class => "btn btn-primary btn-lg" %>
+<%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
+
+<!-- reservation form modal -->
+<div class="modal fade" id="reservationModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <form class="form-horizontal">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Reservation</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="datetime" class="col-sm-3 control-label">Date and time</label>
+          <div class="col-sm-9">
+            <div class="input-group date" id="datetime">
+              <input type="text" class="form-control" />
+              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="court" class="col-sm-3 control-label">Court</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <select class="selectpicker" id="court">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="balls" class="col-sm-3 control-label">Guests</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <select class="selectpicker" id="balls">
+                <option value=0>0</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="raquets" class="col-sm-3 control-label">Raquets</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <select class="selectpicker" id="raquets">
+                <option value=0>0</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="balls" class="col-sm-3 control-label">Balls</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <select class="selectpicker" id="balls">
+                <option value=0>0</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Reserve</button>
+      </div>
+      <script type="text/javascript">
+        var today = moment();
+        $('#datetime').datetimepicker({
+          enabledDates: [
+            moment(today),
+            moment(today).add(1, 'days'),
+            moment(today).add(2, 'days')
+          ],
+          minuteStepping: 15
+        });
+        $('.selectpicker').selectpicker();
+      </script>
+    </form>
+  </div>
+</div>
+</div>
 
 <div id='calendar'></div>
