@@ -14,14 +14,15 @@ $(document).ready ->
 				hideDays.push(i)
 
 	$('#calendar').fullCalendar
-		defaultView: 'agendaWeek',
+		defaultView: 'month',
 		allDaySlot: false,
 		minTime: moment.duration("05:00:00"),
 		maxTime: moment.duration("22:00:00"),
 		slotDuration: moment.duration("00:15:00"),
-		hiddenDays: hideDays,
 		height: 'auto',
-		header: false,
+		header: {
+			left: 'month,agendaWeek,agendaDay'
+		},
 		events: [
 			{
 				title: 'Reserved Block',
@@ -54,3 +55,12 @@ $(document).ready ->
 		minuteStepping: 15
 
 	$('#selectpicker').selectpicker
+
+	$('#reserveButton').on "click", ->
+		startTime = $('#datetime').data("DateTimePicker").getDate()
+		$('#calendar').fullCalendar('renderEvent', {
+			title: 'Reserved Block',
+			start: startTime,
+			end: moment(startTime).add(1, 'hours')
+		}, true)
+		$('#calendar').fullCalendar('refetchEvents')
