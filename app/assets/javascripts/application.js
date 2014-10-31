@@ -17,4 +17,5 @@
 //= require bootstrap-sprockets
 //= require fullcalendar
 //= require bootstrap-datetimepicker
+//= require bootstrap-select
 //= require_tree .

@@ -25,8 +25,10 @@ $(document).ready ->
 
 	$('#datetime').datetimepicker
 		enabledDates: [
-      moment(today),
-      moment(today).add(1, 'days'),
-      moment(today).add(2, 'days')
-    ],
-    minuteStepping: 15
+		  moment(today),
+		  moment(today).add(1, 'days'),
+		  moment(today).add(2, 'days')
+		],
+		minuteStepping: 15
+
+	$('#selectpicker').selectpicker
