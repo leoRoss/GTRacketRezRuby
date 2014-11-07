@@ -13,16 +13,15 @@ $(document).ready ->
 			unless i == dayOfWeek or i == (dayOfWeek + 1) % 7 or i == (dayOfWeek + 2) % 7
 				hideDays.push(i)
 
-	$('#calendar').fullCalendar
-		defaultView: 'month',
+	$('.calendar').fullCalendar
+		defaultView: 'agendaDay',
 		allDaySlot: false,
 		minTime: moment.duration("05:00:00"),
 		maxTime: moment.duration("22:00:00"),
 		slotDuration: moment.duration("00:15:00"),
 		height: 'auto',
-		header: {
-			left: 'month,agendaWeek,agendaDay'
-		},
+		header: false,
+		start: moment().add(1, 'days'),
 		events: [
 			{
 				title: 'Reserved Block',
@@ -45,6 +44,9 @@ $(document).ready ->
 				end: '2014-10-31T18:45:00'
 			}
 		]
+	$('#today').fullCalendar('gotoDate', moment())
+	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
+	$('#dayafter').fullCalendar('gotoDate', moment().add(2, 'days'))
 
 	$('#datetime').datetimepicker
 		enabledDates: [
