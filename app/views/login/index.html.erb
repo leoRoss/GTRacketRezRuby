@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+    </div>
+  </div>
+</nav>
+
+
+<% @page_title = "Login" %>
+<div class="Sign_Form" align = "center" style="background-color:#f5f5dc;color:#000000;padding:10px;width:30%;margin:0 auto">
+<h1>GT RacketRez Login</h1>
+
+<%= form_for :article do |f| %>
+  <p>
+    <%= f.label :Username %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label :Password %><br>
+    <%= f.password_field :text %>
+  </p>
+ 
+  <p>
+</br>
+  <button id="loginButton" type="button" class="btn btn-primary">Register</button>
+  <button id="registerButton" type="button" class="btn btn-primary">Login</button>
+
+
+  </p>
+<% end %>
+
+
+</div>

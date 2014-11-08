@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
+  get 'login/index'
+
+  get 'login' => 'login#index'
+
   resources :reservations
 
   root 'reservations#index'
 
   get 'reservations/index'
+
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
