@@ -1,7 +1,9 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user! 
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
-	@reservations = Reservation.all
+	 @reservations = Reservation.all
   end
 
   def show

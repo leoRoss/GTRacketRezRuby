@@ -13,24 +13,15 @@
   <% end %>
   
   <p><b>Required</b></p>
-  <p> Name: <%= form.text_field :name %> </p>
-  <p> Phone #: <%= form.text_field :phone %> </p> 
   <p> Start Time:  <%= form.text_field :start %> , lets preset this with the time that was clicked on, and no longer have it changeable</p>
   <p> Duration:  <%= form.text_field :duration %> , lets make this a drop down menu with the next 15,30,45,60,75,90 minutes </p> 
   <p> Court: <%= form.text_field :court %> lets preset this with the clicked time and make it no longer changeable </p> 
   <p>
   <p><b>Optional</b></p>
-  <p> GTID: <%= form.text_field :gtid %> </p> 
-  <p> GTUserName: <%= form.text_field :gtuser %> ex: gbrudell3</p> 
-  <p> Email: <%= form.text_field :email %> (confirmations and reminders)</p> 
   <p> Guests: </p>
   <p> <%= form.text_field :guest1 %> </p> 
   <p> <%= form.text_field :guest2 %> </p> 
-  <p> <%= form.text_field :guest3 %> </p> 
+  <p> <%= form.text_field :guest3 %> </p>
+  <br>
   <p> <%= form.submit %> </p>
-
-  lets not have the user put in # of rackets, balls, goggles,etc.
-  Then the admin at the desk can do that when they actually check out equipment
-
-  Later we need to add error messages if the save fails, see http://guides.rubyonrails.org/getting_started.html#adding-some-validation
 <% end %>

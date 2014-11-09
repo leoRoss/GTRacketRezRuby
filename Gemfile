@@ -38,6 +38,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
 
 gem 'bootstrap-select-rails'
 
+gem 'devise' #users
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
