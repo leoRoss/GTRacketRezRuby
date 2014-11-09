@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'login/index'
-
-  get 'login' => 'login#index'
-
   resources :reservations
 
   root 'reservations#index'
