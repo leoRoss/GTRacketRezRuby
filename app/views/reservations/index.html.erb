@@ -18,6 +18,10 @@
 
 <%= link_to 'New Reservation', new_reservation_path, :class => "btn btn-primary btn-lg" %>
 
+<% @reservations.each do |reservation| %>
+    <h1> <%=reservation.court%> </h1>
+<% end %>
+
 <!-- reservation form modal -->
 <div class="modal fade" id="reservationModal" tabindex="-1" aria-hidden="true">
 <div class="modal-dialog">
