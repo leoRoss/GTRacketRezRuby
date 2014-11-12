@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
 
   private
   def cleaned_res_params
-    params.require(:reservation).permit(:name,:phone,:start,:duration,:court,:gtid,:gtuser,:email,:guest1,:guest2,:guest3)
+    params.require(:reservation).permit(:user_id,:name,:phone,:start,:duration,:court,:gtid,:gtuser,:email,:guest1,:guest2,:guest3)
   end
 
 end
