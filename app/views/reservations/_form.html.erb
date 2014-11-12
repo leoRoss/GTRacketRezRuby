@@ -1,6 +1,7 @@
 <%= form_for @reservation do |form| %>
   
   <h1><%=current_user.name%></h1>
+  
   <% if @reservation.errors.any? %>
 	  <div id="error_explanation">
 	    <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited
