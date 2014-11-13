@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
+		
 	today = moment()
 	dayOfWeek = moment().diff(moment().startOf('week'),'days')
 
@@ -12,6 +13,16 @@ $(document).ready ->
 		do (i) ->
 			unless i == dayOfWeek or i == (dayOfWeek + 1) % 7 or i == (dayOfWeek + 2) % 7
 				hideDays.push(i)
+	eventList = []
+	day = 12
+	for reservation in gon.reservations
+		item = {
+			title: 'Reservation for Court ' + reservation.court + ', by ' + gon.user + ' with ' + reservation.guest1
+			start: '2014-11-'+day+'T11:30:00'
+			end: '2014-11-'+day+'T12:30:00'
+		}
+		eventList.push(item)
+		day++
 
 	$('.calendar').fullCalendar
 		defaultView: 'agendaDay',
@@ -22,28 +33,8 @@ $(document).ready ->
 		height: 'auto',
 		header: false,
 		start: moment().add(1, 'days'),
-		events: [
-			{
-				title: 'Reserved Block',
-				start: '2014-11-01T11:30:00'
-				end: '2014-11-01T12:30:00'
-			},
-			{
-				title: 'Reserved Block',
-				start: '2014-10-31T14:00:00'
-				end: '2014-10-31T15:00:00'
-			},
-			{
-				title: 'Reserved Block',
-				start: '2014-11-02T09:15:00'
-				end: '2014-11-02T10:15:00'
-			},
-			{
-				title: 'Reserved Block',
-				start: '2014-10-31T17:45:00'
-				end: '2014-10-31T18:45:00'
-			}
-		]
+		events: eventList
+
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
 	$('#dayafter').fullCalendar('gotoDate', moment().add(2, 'days'))

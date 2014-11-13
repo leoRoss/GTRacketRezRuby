@@ -3,7 +3,9 @@ class ReservationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-	 @reservations = Reservation.all
+    @reservations = Reservation.all
+    gon.reservations = @reservations
+    gon.user = current_user.try(:name)
   end
 
   def show
