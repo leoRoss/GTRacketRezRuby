@@ -14,12 +14,19 @@ $(document).ready ->
 			unless i == dayOfWeek or i == (dayOfWeek + 1) % 7 or i == (dayOfWeek + 2) % 7
 				hideDays.push(i)
 	eventList = []
-	day = 12
+	day = 13
 	for reservation in gon.reservations
+
+		#startTime = new Date(reservation.start)
+		startTime = new Date('2014-11-'+day+' 11:30:00')
+		endTime = new Date(startTime)
+		endTime.setMinutes(startTime.getMinutes() + reservation.duration)
+		description = 'Reservation for Court ' + reservation.court + ', by ' + gon.user + ' with ' + reservation.guest1
+
 		item = {
-			title: 'Reservation for Court ' + reservation.court + ', by ' + gon.user + ' with ' + reservation.guest1
-			start: '2014-11-'+day+'T11:30:00'
-			end: '2014-11-'+day+'T12:30:00'
+			title: 
+			start: startTime
+			end: endTime
 		}
 		eventList.push(item)
 		day++
