@@ -7,4 +7,5 @@ class Reservation < ActiveRecord::Base
   validates  :start, presence: true
   validates  :duration, presence: true
   validates  :court, presence: true
+  validates  :user_id, presence: true
 end

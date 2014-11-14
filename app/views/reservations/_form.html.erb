@@ -1,5 +1,9 @@
 <%= form_for @reservation do |form| %>
-
+  
+  <h1><%=current_user.name%><%= current_user.id%> </h1>
+  <% if current_user.admin %>
+      <h2> You Are ADMIN!!!</h2>
+  <% end %>
   <% if @reservation.errors.any? %>
 	  <div id="error_explanation">
 	    <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited
@@ -12,6 +16,8 @@
 	  </div>
   <% end %>
   
+  <%= form.hidden_field :user_id, :value => current_user.id %>
+
   <p><b>Required</b></p>
   <p> Start Time:  <%= form.text_field :start %> , lets preset this with the time that was clicked on, and no longer have it changeable</p>
   <p> Duration:  <%= form.text_field :duration %> , lets make this a drop down menu with the next 15,30,45,60,75,90 minutes </p> 

@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
+		
 	today = moment()
 	dayOfWeek = moment().diff(moment().startOf('week'),'days')
 
@@ -12,6 +13,23 @@ $(document).ready ->
 		do (i) ->
 			unless i == dayOfWeek or i == (dayOfWeek + 1) % 7 or i == (dayOfWeek + 2) % 7
 				hideDays.push(i)
+	eventList = []
+	day = 13
+
+	for reservation in gon.reservations
+		startTime = new Date(reservation.start)
+		#startTime = new Date('2014-11-'+day+' 11:30:00')
+		endTime = new Date(startTime)
+		endTime.setMinutes(startTime.getMinutes() + reservation.duration)
+		description = 'Reservation for Court ' + reservation.court + ', by ' + gon.user + ' with ' + reservation.guest1
+
+		item = {
+			title: description
+			start: startTime
+			end: endTime
+		}
+		eventList.push(item)
+		day++
 
 	$('.calendar').fullCalendar
 		defaultView: 'agendaDay',
@@ -27,6 +45,8 @@ $(document).ready ->
 			$('#start').data('DateTimePicker').setDate(start)
 			$('#end').data('DateTimePicker').setDate(moment(start).add(1, 'hours'))
 			$('#reservationModal').modal('show')
+		events: eventList
+
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
 	$('#dayafter').fullCalendar('gotoDate', moment().add(2, 'days'))

@@ -5,10 +5,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">[username] <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.try(:name)%> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Logout</a></li>
+            <%= link_to 'Logout', destroy_user_session_path, :method => :delete%>
           </ul>
         </li>
       </ul>
@@ -16,7 +15,7 @@
   </div>
 </nav>
 
-<%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
+<%= link_to 'New Reservation', new_reservation_path, :class => "btn btn-primary btn-lg" %>
 
 <!-- reservation form modal -->
 <div class="modal fade" id="reservationModal" tabindex="-1" aria-hidden="true">

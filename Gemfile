@@ -40,6 +40,12 @@ gem 'bootstrap-select-rails'
 
 gem 'devise' #users
 
+gem 'tzinfo-data'
+
+gem 'tzinfo'
+
+gem 'gon'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

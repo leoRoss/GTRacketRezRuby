@@ -3,7 +3,9 @@ class ReservationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-	 @reservations = Reservation.all
+    @reservations = Reservation.all
+    gon.reservations = @reservations
+    gon.user = current_user.try(:name)
   end
 
   def show
@@ -47,7 +49,7 @@ class ReservationsController < ApplicationController
 
   private
   def cleaned_res_params
-    params.require(:reservation).permit(:name,:phone,:start,:duration,:court,:gtid,:gtuser,:email,:guest1,:guest2,:guest3)
+    params.require(:reservation).permit(:user_id,:name,:phone,:start,:duration,:court,:gtid,:gtuser,:email,:guest1,:guest2,:guest3)
   end
 
 end
