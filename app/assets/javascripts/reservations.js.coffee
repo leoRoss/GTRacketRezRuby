@@ -16,39 +16,22 @@ $(document).ready ->
 	$('.calendar').fullCalendar
 		defaultView: 'agendaDay',
 		allDaySlot: false,
-		minTime: moment.duration("05:00:00"),
-		maxTime: moment.duration("22:00:00"),
-		slotDuration: moment.duration("00:15:00"),
+		minTime: moment.duration('05:00:00'),
+		maxTime: moment.duration('22:00:00'),
+		slotDuration: moment.duration('00:15:00'),
 		height: 'auto',
 		header: false,
 		start: moment().add(1, 'days'),
-		events: [
-			{
-				title: 'Reserved Block',
-				start: '2014-11-01T11:30:00'
-				end: '2014-11-01T12:30:00'
-			},
-			{
-				title: 'Reserved Block',
-				start: '2014-10-31T14:00:00'
-				end: '2014-10-31T15:00:00'
-			},
-			{
-				title: 'Reserved Block',
-				start: '2014-11-02T09:15:00'
-				end: '2014-11-02T10:15:00'
-			},
-			{
-				title: 'Reserved Block',
-				start: '2014-10-31T17:45:00'
-				end: '2014-10-31T18:45:00'
-			}
-		]
+		selectable: true,
+		select: (start, end, allDay) ->
+			$('#start').data('DateTimePicker').setDate(start)
+			$('#end').data('DateTimePicker').setDate(moment(start).add(1, 'hours'))
+			$('#reservationModal').modal('show')
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
 	$('#dayafter').fullCalendar('gotoDate', moment().add(2, 'days'))
 
-	$('#datetime').datetimepicker
+	$('.datetimepicker').datetimepicker
 		enabledDates: [
 		  moment(today),
 		  moment(today).add(1, 'days'),
@@ -58,11 +41,22 @@ $(document).ready ->
 
 	$('#selectpicker').selectpicker
 
-	$('#reserveButton').on "click", ->
-		startTime = $('#datetime').data("DateTimePicker").getDate()
-		$('#calendar').fullCalendar('renderEvent', {
-			title: 'Reserved Block',
+	reserveOnClick = ->
+		eventTitle = 'Your Reservation'
+		startTime = $('#start').data('DateTimePicker').getDate()
+		endTime = $('#end').data('DateTimePicker').getDate()
+		$('#today').fullCalendar('renderEvent', {
+			title: eventTitle,
 			start: startTime,
-			end: moment(startTime).add(1, 'hours')
+			end: endTime,
+			allDay: false
 		}, true)
-		$('#calendar').fullCalendar('refetchEvents')
+		params =
+			title: eventTitle,
+			start: startTime.format('YYYY-MM-DD'),
+			duration: endTime.diff(startTime),
+			court: $('#court').val()
+		$('#reservationModal').modal('hide')
+		$('.calendar').fullCalendar('unselect')
+
+	$('#reserveButton').on 'click', reserveOnClick
