@@ -15,16 +15,16 @@ $(document).ready ->
 				hideDays.push(i)
 	eventList = []
 	day = 13
-	for reservation in gon.reservations
 
-		#startTime = new Date(reservation.start)
-		startTime = new Date('2014-11-'+day+' 11:30:00')
+	for reservation in gon.reservations
+		startTime = new Date(reservation.start)
+		#startTime = new Date('2014-11-'+day+' 11:30:00')
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + reservation.duration)
 		description = 'Reservation for Court ' + reservation.court + ', by ' + gon.user + ' with ' + reservation.guest1
 
 		item = {
-			title: 
+			title: description
 			start: startTime
 			end: endTime
 		}
