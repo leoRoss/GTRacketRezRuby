@@ -1,6 +1,6 @@
 <%= form_for @reservation do |form| %>
   
-  <h1><%=current_user.name%><%= current_user.id%> </h1>
+  <h1>Name: <%=current_user.name%> ID: <%= current_user.id%> </h1>
   <% if current_user.admin %>
       <h2> You Are ADMIN!!!</h2>
   <% end %>
@@ -17,6 +17,8 @@
   <% end %>
   
   <%= form.hidden_field :user_id, :value => current_user.id %>
+  <%= form.hidden_field :name, :value => current_user.name %>
+  <%= form.hidden_field :phone, :value => current_user.phone %>
 
   <p><b>Required</b></p>
   <p> Start Time:  <%= form.text_field :start %> , lets preset this with the time that was clicked on, and no longer have it changeable</p>

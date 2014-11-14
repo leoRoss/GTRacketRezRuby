@@ -21,15 +21,25 @@ $(document).ready ->
 		#startTime = new Date('2014-11-'+day+' 11:30:00')
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + reservation.duration)
-		description = 'Reservation for Court ' + reservation.court + ', by ' + gon.user + ' with ' + reservation.guest1
+		description = 'Reservation for Court ' + reservation.court + ', by ' + reservation.name + ' with ' + reservation.guest1
+
+		if reservation.name == gon.user
+			color = "orange"
+			text = "black"
+		else
+			color = "blue"
+			text = "white"
 
 		item = {
 			title: description
 			start: startTime
 			end: endTime
+			color: color
+			textColor: text
 		}
+		
 		eventList.push(item)
-		day++
+		#day++
 
 	$('.calendar').fullCalendar
 		defaultView: 'agendaDay',

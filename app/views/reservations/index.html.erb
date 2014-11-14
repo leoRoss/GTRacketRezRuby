@@ -16,6 +16,7 @@
 </nav>
 
 <%= link_to 'New Reservation', new_reservation_path, :class => "btn btn-primary btn-lg" %>
+<%= link_to 'Modal', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
 
 <!-- reservation form modal -->
 <div class="modal fade" id="reservationModal" tabindex="-1" aria-hidden="true">
@@ -74,7 +75,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="raquets" class="col-sm-3 control-label">Raquets</label>
+          <label for="racckets" class="col-sm-3 control-label">Rackets</label>
           <div class="col-sm-9">
             <div class="input-group">
               <select class="selectpicker" id="raquets">
