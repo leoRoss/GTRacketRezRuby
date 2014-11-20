@@ -81,11 +81,22 @@ $(document).ready ->
 			end: endTime,
 			allDay: false
 		}, true)
+		# Try to send request with dummy params
 		params =
-			title: eventTitle,
+			user_id: 12345,
+			name: "",
+			phone: 6788962789,
 			start: startTime.format('YYYY-MM-DD'),
 			duration: endTime.diff(startTime),
-			court: $('#court').val()
+			court: $('#court').val(),
+			gtid: 902689731,
+			gtuser: "mhooper6",
+			email: "mhooper6@gatech.edu",
+			guest1: "",
+			guest2: "",
+			guest3: ""
+		console.log(params)
+		jQuery.post("reservations", params)
 		$('#reservationModal').modal('hide')
 		$('.calendar').fullCalendar('unselect')
 
