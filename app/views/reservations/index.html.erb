@@ -21,10 +21,12 @@
   </div>
 </nav>
 
-<%= link_to 'New Reservation', new_reservation_path, "data-toggle" => "modal", :class => "btn btn-primary btn-lg" %>
-<%= link_to 'Modal', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
-
 <div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-4">
       <div class="calendar" id="today"></div>
