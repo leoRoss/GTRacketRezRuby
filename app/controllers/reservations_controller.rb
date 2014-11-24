@@ -13,7 +13,11 @@ class ReservationsController < ApplicationController
   end
 
   def new
-  	@reservation = Reservation.new
+    @reservation = Reservation.new
+    respond_to do |format|
+      format.html #new.html.erb
+      format.json { render json: @reservation}
+    end 
   end
 
   def update
@@ -31,13 +35,19 @@ class ReservationsController < ApplicationController
   end
 
   def create
-  	@reservation = Reservation.new(cleaned_res_params)
- 
-	if @reservation.save
-		redirect_to @reservation #could also render 'index' to go back to calendar view
-	else
-		render 'new'
-	end
+   @reservation = Reservation.new(cleaned_res_params)
+    respond_to do |format|
+      if @reservation.save
+        format.html { redirect_to @reservation, notice: "Save process completed!" }
+        format.json { render json: @reservation, status: :created, location: @reservation }
+      else
+        format.html { 
+          flash.now[:notice]="Save proccess coudn't be completed!" 
+          render :new 
+        }
+        format.json { render json: @reservation.errors, status: :unprocessable_entity}
+      end
+    end
   end
 
   def destroy

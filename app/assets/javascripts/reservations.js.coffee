@@ -82,10 +82,21 @@ $(document).ready ->
 			allDay: false
 		}, true)
 		params =
-			title: eventTitle,
-			start: startTime.format('YYYY-MM-DD'),
-			duration: endTime.diff(startTime),
-			court: $('#court').val()
+			reservation:
+				start: String(startTime.format('YYYY-MM-DD')),
+				duration: String(endTime.diff(startTime)),
+				court: $('#court').val(),
+				user_id: String(1)
+		$.ajax({
+				type: 'POST',
+				url: '/reservations',
+				data: params,
+				success:(data) ->
+	        alert data.id
+	        return false
+	      error:(data) ->
+	        return false
+			})
 		$('#reservationModal').modal('hide')
 		$('.calendar').fullCalendar('unselect')
 
