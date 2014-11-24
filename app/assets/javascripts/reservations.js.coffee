@@ -53,7 +53,6 @@ $(document).ready ->
 		selectable: true,
 		select: (start, end, allDay) ->
 			$('#start').data('DateTimePicker').setDate(start)
-			$('#end').data('DateTimePicker').setDate(moment(start).add(1, 'hours'))
 			$('#reservationModal').modal('show')
 		events: eventList
 
@@ -69,12 +68,15 @@ $(document).ready ->
 		],
 		minuteStepping: 15
 
-	$('#selectpicker').selectpicker
+	#$('.selectpicker').selectpicker
 
 	reserveOnClick = ->
 		eventTitle = 'Your Reservation'
 		startTime = $('#start').data('DateTimePicker').getDate()
-		endTime = $('#end').data('DateTimePicker').getDate()
+		duration = $('#duration').val()
+		endTime = new Date(startTime)
+		endTime.setMinutes(startTime.minutes() + duration)
+
 		$('#today').fullCalendar('renderEvent', {
 			title: eventTitle,
 			start: startTime,
@@ -84,7 +86,7 @@ $(document).ready ->
 		params =
 			reservation:
 				start: String(startTime.format('YYYY-MM-DD')),
-				duration: String(endTime.diff(startTime)/60000),
+				duration: String(duration),
 				court: $('#court').val(),
 				user_id: String(1)
 		$.ajax({
