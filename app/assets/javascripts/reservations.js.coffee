@@ -92,7 +92,6 @@ $(document).ready ->
 				url: '/reservations',
 				data: params,
 				success:(data) ->
-	        alert data.id
 	        return false
 	      error:(data) ->
 	        return false
