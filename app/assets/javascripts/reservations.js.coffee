@@ -13,32 +13,29 @@ $(document).ready ->
 			unless i == dayOfWeek or i == (dayOfWeek + 1) % 7 or i == (dayOfWeek + 2) % 7
 				hideDays.push(i)
 	eventList = []
-	day = 13
 
 	for reservation in gon.reservations
 		startTime = new Date(reservation.start)
-		#startTime = new Date('2014-11-'+day+' 11:30:00')
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + reservation.duration)
-		description = 'Reservation for Court ' + reservation.court + ', by ' + reservation.name + ' with ' + reservation.guest1
+		description = 'Reservation for Court ' + reservation.court + ', by ' + reservation.name
 
 		if reservation.name == gon.user
-			color = "orange"
+			color = "#F7FE2E"
 			text = "black"
 		else
-			color = "blue"
+			color = "#6AA4C1"
 			text = "white"
 
 		item = {
 			title: description
-			start: startTime
-			end: endTime
+			start: startTime.toISOString()
+			end: endTime.toISOString()
 			color: color
 			textColor: text
 		}
 		
 		eventList.push(item)
-		#day++
 
 	$('.calendar').fullCalendar
 		defaultView: 'agendaDay',
@@ -54,6 +51,8 @@ $(document).ready ->
 			$('#start').data('DateTimePicker').setDate(start)
 			$('#reservationModal').modal('show')
 		events: eventList
+		eventClick: (calEvent, jsEvent, view) ->
+			alert("calEvent.")
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
@@ -70,33 +69,36 @@ $(document).ready ->
 	#$('.selectpicker').selectpicker
 
 	reserveOnClick = ->
-		eventTitle = 'Your Reservation'
-		startTime = $('#start').data('DateTimePicker').getDate()
+		eventTitle = 'Reservation for Court ' + $('#court').val() + ", by " + gon.user
+		startTime = new Date($('#start').data('DateTimePicker').getDate())
 		duration = $('#duration').val()
 		endTime = new Date(startTime)
-		endTime.setMinutes(startTime.minutes() + duration)
+		endTime.setMinutes(startTime.getMinutes() + duration)
 
 		$('#today').fullCalendar('renderEvent', {
 			title: eventTitle,
-			start: startTime,
-			end: endTime,
+			start: startTime.toISOString(),
+			end: endTime.toISOString(),
 			allDay: false
 		}, true)
 		params =
 			reservation:
-				start: String(startTime.format('YYYY-MM-DD')),
+				name: gon.user
+				start: startTime.toISOString(),
 				duration: duration,
 				court: $('#court').val(),
-				user_id: String(current_user)
+				user_id: String(current_user),
+				color: "#6AA4C1"
+				textColor: "white"
 		$.ajax({
 				type: 'POST',
 				url: '/reservations',
 				data: params,
 				success:(data) ->
-	        return false
-	      error:(data) ->
-	        return false
-			})
+			        return false
+			    error:(data) ->
+			        return false
+		})
 		$('#reservationModal').modal('hide')
 		$('.calendar').fullCalendar('unselect')
 
