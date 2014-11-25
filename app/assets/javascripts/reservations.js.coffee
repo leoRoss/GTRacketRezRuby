@@ -86,7 +86,7 @@ $(document).ready ->
 		params =
 			reservation:
 				start: String(startTime.format('YYYY-MM-DD')),
-				duration: String(duration),
+				duration: duration,
 				court: $('#court').val(),
 				user_id: String(1)
 		$.ajax({

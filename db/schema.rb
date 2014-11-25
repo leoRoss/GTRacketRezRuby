@@ -14,15 +14,12 @@
 ActiveRecord::Schema.define(version: 20141108195304) do
 
   create_table "reservations", force: true do |t|
-    t.integer  "gtid"
     t.string   "name",       limit: 50
+    t.string   "phone",      limit: 20
+    t.string   "gtid",       limit: 50
     t.datetime "start"
     t.integer  "duration"
-    t.string   "phone",      limit: 20
     t.integer  "court"
-    t.integer  "rackets"
-    t.integer  "ball"
-    t.integer  "goggles"
     t.string   "guest1",     limit: 50
     t.string   "guest2",     limit: 50
     t.string   "guest3",     limit: 50
