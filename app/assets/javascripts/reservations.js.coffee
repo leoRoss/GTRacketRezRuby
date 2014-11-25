@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-		
 	today = moment()
 	dayOfWeek = moment().diff(moment().startOf('week'),'days')
 
@@ -86,9 +85,9 @@ $(document).ready ->
 		params =
 			reservation:
 				start: String(startTime.format('YYYY-MM-DD')),
-				duration: String(duration),
+				duration: duration,
 				court: $('#court').val(),
-				user_id: String(1)
+				user_id: String(current_user)
 		$.ajax({
 				type: 'POST',
 				url: '/reservations',
