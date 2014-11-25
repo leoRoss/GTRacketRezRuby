@@ -52,7 +52,7 @@ $(document).ready ->
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
-			alert("calEvent.")
+			alert(calEvent.title)
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
@@ -84,6 +84,7 @@ $(document).ready ->
 		params =
 			reservation:
 				name: gon.user
+				phone: current_phone
 				start: startTime.toISOString(),
 				duration: duration,
 				court: $('#court').val(),
