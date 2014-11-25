@@ -21,7 +21,7 @@ $(document).ready ->
 		description = 'Reservation for Court ' + reservation.court + ', by ' + reservation.name
 
 		if reservation.name == gon.user
-			color = "#F7FE2E"
+			color = "#58FA82"
 			text = "black"
 		else
 			color = "#6AA4C1"
@@ -52,7 +52,7 @@ $(document).ready ->
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
-			alert(calEvent.title)
+			alert(calEvent.end)
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
@@ -80,7 +80,10 @@ $(document).ready ->
 			start: startTime.toISOString(),
 			end: endTime.toISOString(),
 			allDay: false
+			color: "#58FA82"
+			textColor: "black"
 		}, true)
+
 		params =
 			reservation:
 				name: gon.user
@@ -89,8 +92,7 @@ $(document).ready ->
 				duration: duration,
 				court: $('#court').val(),
 				user_id: String(current_user),
-				color: "#6AA4C1"
-				textColor: "white"
+
 		$.ajax({
 				type: 'POST',
 				url: '/reservations',
