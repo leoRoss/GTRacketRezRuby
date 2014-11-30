@@ -1,7 +1,6 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-
 $(document).ready ->
 	today = moment()
 	dayOfWeek = moment().diff(moment().startOf('week'),'days')
@@ -44,7 +43,7 @@ $(document).ready ->
 		maxTime: moment.duration('22:00:00'),
 		slotDuration: moment.duration('00:15:00'),
 		height: 'auto',
-		header: false,
+		header: true,
 		start: moment().add(1, 'days'),
 		selectable: true,
 		select: (start, end, allDay) ->
@@ -52,7 +51,16 @@ $(document).ready ->
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
-			alert(calEvent.end)
+			#alert(calEvent.end)
+			$("#dialog").dialog ->
+				alert("hello")
+				resizable: false
+				height: 200
+				width: 500
+				modal: true
+				title: "Want you want to do?"
+
+			$('#dialog').dialog('open')
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
@@ -74,6 +82,7 @@ $(document).ready ->
 		duration = $('#duration').val()
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + duration)
+		alert(duration)
 
 		$('#today').fullCalendar('renderEvent', {
 			title: eventTitle,

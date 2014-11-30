@@ -28,9 +28,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-4 text-center">
-      <%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
-    </div>
+    <div class="button">
+    <% if current_user %>
+      <div class="col-md-4 text-center">
+        <%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
+      </div>
+    <% end %>
+    </div> 
   </div>
   <div class="row">
     <div class="col-md-4">
@@ -44,3 +48,5 @@
     </div>
   </div>
 </div>
+
+<div class="class" id="dialog" title="" style="display:none;">Are you sure want to delete it?</div>
