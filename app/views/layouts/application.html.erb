@@ -20,13 +20,13 @@ $(document).ready(function(){
 </script>
 
 <% unless notice.blank? %>
-<div id="mydiv" align = "center" style="width:30%;margin:0 auto;border:2px solid;padding-top:10px;background-color:#76EE00">
+<div id="mydiv" align = "center" style="width:30%;margin:0 auto;border:2px solid;padding-top:10px;min-width:200px;background-color:#76EE00">
 
 <p class="notice"><%= notice %></p><br>
 </div>
 <% end %>
 <% unless alert.blank? %>
-<div id="mydiv" align="center" style="background-color:#ff4c4c;border:2px solid;width:30%;margin:0 auto">
+<div id="mydiv" align="center" style="background-color:#ff4c4c;border:2px solid;width:30%;min-width:200px;margin:0 auto">
 <p class="alert"><%= alert %></p>
 </div>
 <% end %>
