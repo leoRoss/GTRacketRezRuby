@@ -3,23 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
 	
-	today = moment()
-	dayOfWeek = moment().diff(moment().startOf('week'),'days')
-
-	# hack to get the correct days to display
-	hideDays = []
-	for i in [0..7]
-		do (i) ->
-			unless i == dayOfWeek or i == (dayOfWeek + 1) % 7 or i == (dayOfWeek + 2) % 7
-				hideDays.push(i)
-
 	getActiveEvents = (activeTab) ->
 		eventList = []
 
 		for reservation in gon.reservations
 			
-			# console.log(reservation)
-
 			if reservation.court == activeTab
 
 				startTime = new Date(reservation.start)
@@ -92,8 +80,6 @@ $(document).ready ->
 		  moment(today).add(2, 'days')
 		],
 		minuteStepping: 15
-
-	#$('.selectpicker').selectpicker
 	
 	reserveOnClick = ->
 		eventTitle = 'Name: ' + gon.user  + "\nCourt: " + $('#court').val()
