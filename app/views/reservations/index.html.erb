@@ -1,6 +1,6 @@
 <script type="text/javascript">
   current_user = <%= current_user.try(:id) %>
-  current_phone = <%= current_user.try(:phone) %>
+  current_phone = <%= current_user.try(:phone).delete(' ') %>
 </script>
 
   <nav class="navbar navbar-default" role="navigation">
@@ -85,9 +85,11 @@
           <h4 class="modal-title">Reservation Details</h4>
         </div>
         <div class="modal-body" id="eventDesc">
+          <p hidden id='res_desc'></p>
           <p id='name_desc'></p>
           <p id='court_desc'></p>
-          <p id='date_desc'></p>
+          <p id='startdate_desc'></p>
+          <p id='enddate_desc'></p>
           <p id='start_desc'></p>
           <p id='end_desc'></p>
         </div>
