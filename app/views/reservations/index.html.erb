@@ -1,52 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <script type="text/javascript">
   current_user = <%= current_user.try(:id) %>
   current_phone = <%= current_user.try(:phone) %>
 </script>
 
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">CRC Reservations</a>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">CRC Racketball Reservations</a>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <% if current_user %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.try(:name)%> <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <%= link_to 'Logout', destroy_user_session_path, :method => :delete%>
-              <br>
-              <%= link_to 'Edit Account', edit_user_registration_path %>
-            </ul>  
-          </li>
-        <% else %>
-          <%= link_to 'Login',new_user_session_path%> OR <%= link_to 'Sign Up', new_user_registration_path %>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container">
-  <div class="row">
-    <div class="button">
-    <% if current_user %>
-      <div class="col-md-4 text-center">
-        <%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.try(:name)%> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <%= link_to 'Logout', destroy_user_session_path, :method => :delete%>
+                <br>
+                <%= link_to 'Edit Account', edit_user_registration_path %>
+              </ul>  
+            </li>
+          <% else %>
+            <%= link_to 'Login',new_user_session_path, :class => "btn btn-default btn-lg" %> OR <%= link_to 'Sign Up', new_user_registration_path, :class => "btn btn-default btn-lg" %>
+          <% end %>
+        </ul>
       </div>
-    <% end %>
-    </div> 
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="calendar" id="today"></div>
     </div>
-    <div class="col-md-4">
-      <div class="calendar" id="tomorrow"></div>
-    </div>
-    <div class="col-md-4">
-      <div class="calendar" id="dayafter"></div>
-    </div>
-  </div>
-</div>
+  </nav>
 
-<div class="class" id="dialog" title="" style="display:none;">Are you sure want to delete it?</div>
+  <div class="container">
+    <div class="row">
+      <div class="button">
+      <% if current_user %>
+        <div class="col-md-4 text-center">
+          <%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
+        </div>
+      <% end %>
+      </div> 
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="calendar" id="today"></div>
+      </div>
+      <div class="col-md-4">
+        <div class="calendar" id="tomorrow"></div>
+      </div>
+      <div class="col-md-4">
+        <div class="calendar" id="dayafter"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="class" id="dialog" title="" style="display:none;">Are you sure want to delete it?</div>
+</head>

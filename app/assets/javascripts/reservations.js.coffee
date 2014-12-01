@@ -52,15 +52,6 @@ $(document).ready ->
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
 			#alert(calEvent.end)
-			$("#dialog").dialog ->
-				alert("hello")
-				resizable: false
-				height: 200
-				width: 500
-				modal: true
-				title: "Want you want to do?"
-
-			$('#dialog').dialog('open')
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
