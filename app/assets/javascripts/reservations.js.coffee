@@ -11,34 +11,38 @@ $(document).ready ->
 		do (i) ->
 			unless i == dayOfWeek or i == (dayOfWeek + 1) % 7 or i == (dayOfWeek + 2) % 7
 				hideDays.push(i)
-	eventList = []
 
-	for reservation in gon.reservations
+	getActiveEvents = (activeTab) ->
+		eventList = []
 
-		startTime = new Date(reservation.start)
-		endTime = new Date(startTime)
-		endTime.setMinutes(startTime.getMinutes() + reservation.duration)
-		description =  'Name: ' + reservation.name + "\nCourt: " + reservation.court
+		for reservation in gon.reservations
+			
+			if reservation.court == activeTab
+				startTime = new Date(reservation.start)
+				endTime = new Date(startTime)
+				endTime.setMinutes(startTime.getMinutes() + reservation.duration)
+				description =  'Name: ' + reservation.name + "\nCourt: " + reservation.court
 
-		if reservation.name == gon.user
-			color = "#58FA82"
-			text = "black"
-		else
-			color = "#6AA4C1"
-			text = "white"
+				if reservation.name == gon.user
+					color = "#58FA82"
+					text = "black"
+				else
+					color = "#6AA4C1"
+					text = "white"
 
-		item = {
-			id: reservation.id
-			name: reservation.name
-			court: reservation.court
-			title: description
-			start: startTime.toISOString()
-			end: endTime.toISOString()
-			color: color
-			textColor: text
-		}
-		
-		eventList.push(item)
+				item = {
+					id: reservation.id
+					name: reservation.name
+					court: reservation.court
+					title: description
+					start: startTime.toISOString()
+					end: endTime.toISOString()
+					color: color
+					textColor: text
+				}
+				
+				eventList.push(item)
+			return eventList
 
 	$('.calendar').fullCalendar
 		defaultView: 'agendaDay',
@@ -56,7 +60,7 @@ $(document).ready ->
 			$('select#court option').eq(tab-1).prop('selected',true)
 			$('select.selectpicker').selectpicker('refresh')
 			$('#reservationModal').modal('show')
-		events: eventList
+		events: getActiveEvents(),
 		eventClick: (calEvent, jsEvent, view) ->
 			if calEvent.name == gon.user || gon.user == "Billy Smith" #Billy Smith is the admin user
 				start = calEvent.start
@@ -83,7 +87,7 @@ $(document).ready ->
 		minuteStepping: 15
 
 	#$('.selectpicker').selectpicker
-
+	
 	reserveOnClick = ->
 
 		eventTitle = 'Name: ' + gon.user  + "\nCourt: " + $('#court').val()
@@ -141,6 +145,14 @@ $(document).ready ->
 
 		$('.calendar').fullCalendar('removeEvents', curr_id)
 
+	tabOnClick = (e) ->
+		c = $('.calendar')
+		c.fullCalendar('removeEvents')
+		console.log(getActiveEvents(e.target.parentNode.value))
+		c.fullCalendar('addEventSource', getActiveEvents(e.target.parentNode.value))
+		c.fullCalendar('rerenderEvents')
+
 	$('#reserveButton').on 'click', reserveOnClick
 	$('#deleteButton').on 'click', confirmDelete
 	$('#confirmButton').on 'click', deleteEvent
+	$('ul#tabs li').on 'click', tabOnClick
