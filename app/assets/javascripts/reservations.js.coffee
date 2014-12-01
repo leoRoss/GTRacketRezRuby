@@ -53,6 +53,9 @@ $(document).ready ->
 		selectable: true if gon.user,
 		select: (start, end, allDay) ->
 			$('#start').data('DateTimePicker').setDate(start)
+			tab = $('ul#tabs li.active')[0].value
+			$('select#court option').eq(tab-1).prop('selected',true)
+			$('select.selectpicker').selectpicker('refresh')
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
