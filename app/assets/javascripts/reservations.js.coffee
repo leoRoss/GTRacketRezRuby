@@ -17,7 +17,7 @@ $(document).ready ->
 		startTime = new Date(reservation.start)
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + reservation.duration)
-		description = 'Reservation for Court ' + reservation.court + ', by ' + reservation.name
+		description =  'Name: ' + reservation.name + "\nCourt: " + reservation.court
 
 		if reservation.name == gon.user
 			color = "#58FA82"
@@ -51,7 +51,7 @@ $(document).ready ->
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
-			#alert(calEvent.end)
+			$('#deleteDialog').modal('show')
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
