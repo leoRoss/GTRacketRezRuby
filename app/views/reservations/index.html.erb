@@ -1,6 +1,6 @@
 <script type="text/javascript">
   current_user = <%= current_user.try(:id) %>
-  current_phone = <%= current_user.try(:phone).delete(' ') %>
+  current_phone = <%= if current_user then current_user.try(:phone).delete(' ') end%>
 </script>
 
   <nav class="navbar navbar-default" role="navigation">
