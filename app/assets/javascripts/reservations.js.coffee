@@ -109,12 +109,15 @@ $(document).ready ->
 		if (gon.admin)
 			params =
 				reservation:
-					name: $('#name').val(),
-					phone: $('#phone').val(),
+					name: $('#name input').val(),
+					phone: $('#phone input').val(),
 					start: startTime.toISOString(),
 					duration: duration,
 					court: $('#court').val(),
 					user_id: String(current_user),
+					guest1: $('#guest1 input').val(),
+					guest2: $('#guest2 input').val(),
+					guest3: $('#guest3 input').val(),
 		else
 			params =
 				reservation:
@@ -124,7 +127,10 @@ $(document).ready ->
 					duration: duration,
 					court: $('#court').val(),
 					user_id: String(current_user),
-
+					guest1: $('#guest1 input').val(),
+					guest2: $('#guest2 input').val(),
+					guest3: $('#guest3 input').val(),
+					
 
 		$('#today').fullCalendar('renderEvent', reservationInfo, true)
 
