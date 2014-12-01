@@ -120,4 +120,23 @@ $(document).ready ->
 		$('#reservationModal').modal('hide')
 		$('.calendar').fullCalendar('unselect')
 
+	confirmDelete = ->
+		$('#details').modal('hide')
+		$('#delConfirm').modal('show')
+		
+	deleteEvent = ->
+		curr_id = document.getElementById('res_desc').innerHTML.match(/\d+/)
+		$.ajax
+			url: "/reservations/" + curr_id
+			type: "POST"
+			dataType: "json"
+			data:
+				_method: "delete"
+
+		$('#delConfirm').modal('hide')
+
+		$('.calendar').fullCalendar('removeEvents', curr_id)
+
 	$('#reserveButton').on 'click', reserveOnClick
+	$('#deleteButton').on 'click', confirmDelete
+	$('#confirmButton').on 'click', deleteEvent
