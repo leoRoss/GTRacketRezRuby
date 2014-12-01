@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
+	
 	today = moment()
 	dayOfWeek = moment().diff(moment().startOf('week'),'days')
 
@@ -56,14 +57,17 @@ $(document).ready ->
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
 			if calEvent.name == gon.user || gon.user == "Billy Smith" #Billy Smith is the admin user
+				id = calEvent.id
 				start = calEvent.start
 				end = calEvent.end
 				name = calEvent.name
 				court = calEvent.court
 				$('#details').modal('show')
+				document.getElementById('res_desc').innerHTML='Reservation ID: ' + id
 				document.getElementById('name_desc').innerHTML='Name: ' + name
 				document.getElementById('court_desc').innerHTML='Court: ' + court
-				document.getElementById('date_desc').innerHTML='Date: ' + start.format('MM/DD/YY')
+				document.getElementById('startdate_desc').innerHTML='Start Date: ' + start.format('MM/DD/YY')
+				document.getElementById('enddate_desc').innerHTML='End Date: ' + end.format('MM/DD/YY')
 				document.getElementById('start_desc').innerHTML='Start Time: ' + start.format('hh:mmA')
 				document.getElementById('end_desc').innerHTML='End Time: ' + end.format('hh:mmA')
 
@@ -82,14 +86,15 @@ $(document).ready ->
 	#$('.selectpicker').selectpicker
 
 	reserveOnClick = ->
-
+		id = gon.last.id + 1
 		eventTitle = 'Name: ' + gon.user  + "\nCourt: " + $('#court').val()
 		startTime = new Date($('#start').data('DateTimePicker').getDate())
-		duration = $('#duration').val()
+		duration = parseInt($('#duration').val())
 		endTime = new Date(startTime)
-		endTime.setMinutes(startTime.getMinutes() + duration)	
+		endTime.setMinutes(startTime.getMinutes() + duration)
 
 		$('#today').fullCalendar('renderEvent', {
+			id: id
 			name: gon.user
 			court: $('#court').val()
 			title: eventTitle,
@@ -102,6 +107,7 @@ $(document).ready ->
 
 		params =
 			reservation:
+				id: id
 				name: gon.user
 				phone: current_phone
 				start: startTime.toISOString(),
