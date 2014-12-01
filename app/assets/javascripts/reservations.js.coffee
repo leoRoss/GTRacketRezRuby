@@ -14,6 +14,7 @@ $(document).ready ->
 	eventList = []
 
 	for reservation in gon.reservations
+
 		startTime = new Date(reservation.start)
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + reservation.duration)
@@ -28,13 +29,13 @@ $(document).ready ->
 
 		item = {
 			id: reservation.id
+			name: reservation.name
+			court: reservation.court
 			title: description
 			start: startTime.toISOString()
 			end: endTime.toISOString()
 			color: color
 			textColor: text
-			name: reservation.name
-			court: reservation.court
 		}
 		
 		eventList.push(item)
@@ -54,16 +55,15 @@ $(document).ready ->
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
-			if gon.user
-				id = calEvent.id		
+			if calEvent.name == gon.user || gon.user == "Billy Smith" #Billy Smith is the admin user
 				start = calEvent.start
 				end = calEvent.end
 				name = calEvent.name
 				court = calEvent.court
 				$('#details').modal('show')
-				document.getElementById('res_desc').innerHTML='Reservation ID: ' + id
 				document.getElementById('name_desc').innerHTML='Name: ' + name
 				document.getElementById('court_desc').innerHTML='Court: ' + court
+				document.getElementById('date_desc').innerHTML='Date: ' + start.format('MM/DD/YY')
 				document.getElementById('start_desc').innerHTML='Start Time: ' + start.format('hh:mmA')
 				document.getElementById('end_desc').innerHTML='End Time: ' + end.format('hh:mmA')
 
@@ -82,21 +82,22 @@ $(document).ready ->
 	#$('.selectpicker').selectpicker
 
 	reserveOnClick = ->
-		eventTitle = 'Reservation for Court ' + $('#court').val() + ", by " + gon.user
+
+		eventTitle = 'Name: ' + gon.user  + "\nCourt: " + $('#court').val()
 		startTime = new Date($('#start').data('DateTimePicker').getDate())
 		duration = $('#duration').val()
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + duration)	
 
 		$('#today').fullCalendar('renderEvent', {
+			name: gon.user
+			court: $('#court').val()
 			title: eventTitle,
 			start: startTime.toISOString(),
 			end: endTime.toISOString(),
 			allDay: false
 			color: "#58FA82"
 			textColor: "black"
-			name: gon.user
-			court: $('#court').val()
 		}, true)
 
 		params =

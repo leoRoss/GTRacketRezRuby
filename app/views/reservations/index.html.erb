@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <script type="text/javascript">
   current_user = <%= current_user.try(:id) %>
   current_phone = <%= current_user.try(:phone) %>
 </script>
 
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">CRC Racketball Reservations</a>
+      <a class="navbar-brand" href="#">CRC First Floor Court Reservations</a>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
@@ -24,19 +19,47 @@
               </ul>  
             </li>
           <% else %>
-            <%= link_to 'Login',new_user_session_path, :class => "btn btn-link  btn-lg" %> OR <%= link_to 'Sign Up', new_user_registration_path, :class => "btn btn-link  btn-lg" %>
+            <%= link_to 'Login',new_user_session_path, :class => "btn btn-link  btn-lg" %> or <%= link_to 'Sign Up', new_user_registration_path, :class => "btn btn-link  btn-lg" %>
           <% end %>
         </ul>
       </div>
     </div>
   </nav>
+  <div class="container">
+    <div id="content">
+        <ul id="tabs" class="nav nav-tabs nav-justified" data-tabs="tabs">
+            <li class="active"><a href="#court1" data-toggle="tab">Court 1</a></li>
+            <li><a href="#court2" data-toggle="tab">Court 2</a></li>
+            <li><a href="#court3" data-toggle="tab">Court 3</a></li>
+            <li><a href="#court4" data-toggle="tab">Court 4</a></li>
+            <li><a href="#court5" data-toggle="tab">Court 5</a></li>
+        </ul>
+        <div id="my-tab-content" class="tab-content">
+            <div class="tab-pane active" id="court1">
+                <h1>Court 1: Racketball Reservations</h1>
+            </div>
+            <div class="tab-pane" id="court2">
+                <h1>Court 2: Racketball Reservations</h1>
+            </div>
+            <div class="tab-pane" id="court3">
+                <h1>Court 3: Racketball Reservations</h1>
+            </div>
+            <div class="tab-pane" id="court4">
+                <h1>Court 4: Racketball Reservations</h1>
+            </div>
+            <div class="tab-pane" id="court5">
+                <h1>Court 5: Squash Reservations</h1>
+            </div>
+        </div>
+    </div>
+</div>
 
   <div class="container">
     <div class="row">
       <div class="button">
       <% if current_user %>
         <div class="col-md-4 text-center">
-          <%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg" %>
+          <%= link_to 'New Reservation', '#reservationModal', 'data-toggle' => 'modal', :class => "btn btn-primary btn-lg btn-block" %>
         </div>
       <% end %>
       </div> 
@@ -62,9 +85,9 @@
           <h4 class="modal-title">Reservation Details</h4>
         </div>
         <div class="modal-body" id="eventDesc">
-          <p id='res_desc'></p>
           <p id='name_desc'></p>
           <p id='court_desc'></p>
+          <p id='date_desc'></p>
           <p id='start_desc'></p>
           <p id='end_desc'></p>
         </div>
@@ -76,7 +99,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id='delConfirm'>
+  <div class="modal fade" id='delConfirm' >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -90,5 +113,4 @@
       </div>
     </div>
   </div>
-
-</head>
+</html>
