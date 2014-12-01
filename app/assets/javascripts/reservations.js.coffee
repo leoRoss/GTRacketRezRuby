@@ -89,15 +89,13 @@ $(document).ready ->
 	#$('.selectpicker').selectpicker
 
 	reserveOnClick = ->
-		id = gon.last.id + 1
 		eventTitle = 'Name: ' + gon.user  + "\nCourt: " + $('#court').val()
 		startTime = new Date($('#start').data('DateTimePicker').getDate())
 		duration = parseInt($('#duration').val())
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + duration)
 
-		$('#today').fullCalendar('renderEvent', {
-			id: id
+		reservationInfo = {
 			name: gon.user
 			court: $('#court').val()
 			title: eventTitle,
@@ -106,36 +104,11 @@ $(document).ready ->
 			allDay: false
 			color: "#58FA82"
 			textColor: "black"
-		}, true)
-
-		$('#tomorrow').fullCalendar('renderEvent', {
-			id: id
-			name: gon.user
-			court: $('#court').val()
-			title: eventTitle,
-			start: startTime.toISOString(),
-			end: endTime.toISOString(),
-			allDay: false
-			color: "#58FA82"
-			textColor: "black"
-		}, true)
-
-		$('#dayafter').fullCalendar('renderEvent', {
-			id: id
-			name: gon.user
-			court: $('#court').val()
-			title: eventTitle,
-			start: startTime.toISOString(),
-			end: endTime.toISOString(),
-			allDay: false
-			color: "#58FA82"
-			textColor: "black"
-		}, true)
+		}
 
 		if (gon.admin)
 			params =
 				reservation:
-					id: id
 					name: $('#name').val(),
 					phone: $('#phone').val(),
 					start: startTime.toISOString(),
@@ -145,13 +118,20 @@ $(document).ready ->
 		else
 			params =
 				reservation:
-					id: id
 					name: gon.user,
 					phone: current_phone,
 					start: startTime.toISOString(),
 					duration: duration,
 					court: $('#court').val(),
 					user_id: String(current_user),
+
+
+		$('#today').fullCalendar('renderEvent', reservationInfo, true)
+
+		$('#tomorrow').fullCalendar('renderEvent', reservationInfo, true)
+
+		$('#dayafter').fullCalendar('renderEvent', reservationInfo, true)
+
 		$.ajax({
 				type: 'POST',
 				url: '/reservations',
