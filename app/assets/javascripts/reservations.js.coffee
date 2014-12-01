@@ -27,6 +27,7 @@ $(document).ready ->
 			text = "white"
 
 		item = {
+			id: reservation.id
 			title: description
 			start: startTime.toISOString()
 			end: endTime.toISOString()
@@ -53,15 +54,18 @@ $(document).ready ->
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
-			$('#deleteDialog').modal('show')
-			start = calEvent.start
-			end = calEvent.end
-			name = calEvent.name
-			court = calEvent.court
-			document.getElementById('name_desc').innerHTML='Name: ' + name
-			document.getElementById('court_desc').innerHTML='Court: ' + court
-			document.getElementById('start_desc').innerHTML='Start Time: ' + start.format('hh:mmA')
-			document.getElementById('end_desc').innerHTML='End Time: ' + end.format('hh:mmA')
+			if gon.user
+				id = calEvent.id		
+				start = calEvent.start
+				end = calEvent.end
+				name = calEvent.name
+				court = calEvent.court
+				$('#details').modal('show')
+				document.getElementById('res_desc').innerHTML='Reservation ID: ' + id
+				document.getElementById('name_desc').innerHTML='Name: ' + name
+				document.getElementById('court_desc').innerHTML='Court: ' + court
+				document.getElementById('start_desc').innerHTML='Start Time: ' + start.format('hh:mmA')
+				document.getElementById('end_desc').innerHTML='End Time: ' + end.format('hh:mmA')
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
