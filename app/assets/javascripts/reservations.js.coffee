@@ -32,6 +32,8 @@ $(document).ready ->
 			end: endTime.toISOString()
 			color: color
 			textColor: text
+			name: reservation.name
+			court: reservation.court
 		}
 		
 		eventList.push(item)
@@ -45,13 +47,21 @@ $(document).ready ->
 		height: 'auto',
 		header: true,
 		start: moment().add(1, 'days'),
-		selectable: true,
+		selectable: true if gon.user,
 		select: (start, end, allDay) ->
 			$('#start').data('DateTimePicker').setDate(start)
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
 			$('#deleteDialog').modal('show')
+			start = calEvent.start
+			end = calEvent.end
+			name = calEvent.name
+			court = calEvent.court
+			document.getElementById('name_desc').innerHTML='Name: ' + name
+			document.getElementById('court_desc').innerHTML='Court: ' + court
+			document.getElementById('start_desc').innerHTML='Start Time: ' + start.format('hh:mmA')
+			document.getElementById('end_desc').innerHTML='End Time: ' + end.format('hh:mmA')
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
@@ -72,8 +82,7 @@ $(document).ready ->
 		startTime = new Date($('#start').data('DateTimePicker').getDate())
 		duration = $('#duration').val()
 		endTime = new Date(startTime)
-		endTime.setMinutes(startTime.getMinutes() + duration)
-		alert(duration)
+		endTime.setMinutes(startTime.getMinutes() + duration)	
 
 		$('#today').fullCalendar('renderEvent', {
 			title: eventTitle,
@@ -82,6 +91,8 @@ $(document).ready ->
 			allDay: false
 			color: "#58FA82"
 			textColor: "black"
+			name: gon.user
+			court: $('#court').val()
 		}, true)
 
 		params =
