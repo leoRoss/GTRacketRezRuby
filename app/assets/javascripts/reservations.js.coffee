@@ -108,6 +108,30 @@ $(document).ready ->
 			textColor: "black"
 		}, true)
 
+		$('#tomorrow').fullCalendar('renderEvent', {
+			id: id
+			name: gon.user
+			court: $('#court').val()
+			title: eventTitle,
+			start: startTime.toISOString(),
+			end: endTime.toISOString(),
+			allDay: false
+			color: "#58FA82"
+			textColor: "black"
+		}, true)
+
+		$('#dayafter').fullCalendar('renderEvent', {
+			id: id
+			name: gon.user
+			court: $('#court').val()
+			title: eventTitle,
+			start: startTime.toISOString(),
+			end: endTime.toISOString(),
+			allDay: false
+			color: "#58FA82"
+			textColor: "black"
+		}, true)
+
 		params =
 			reservation:
 				id: id
