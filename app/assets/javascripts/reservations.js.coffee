@@ -18,7 +18,10 @@ $(document).ready ->
 
 		for reservation in gon.reservations
 			
+			# console.log(reservation)
+
 			if reservation.court == activeTab
+
 				startTime = new Date(reservation.start)
 				endTime = new Date(startTime)
 				endTime.setMinutes(startTime.getMinutes() + reservation.duration)
@@ -41,9 +44,9 @@ $(document).ready ->
 					color: color
 					textColor: text
 				}
-				
+
 				eventList.push(item)
-			return eventList
+		return eventList
 
 	$('.calendar').fullCalendar
 		defaultView: 'agendaDay',
@@ -61,7 +64,7 @@ $(document).ready ->
 			$('select#court option').eq(tab-1).prop('selected',true)
 			$('select.selectpicker').selectpicker('refresh')
 			$('#reservationModal').modal('show')
-		events: getActiveEvents(),
+		events: getActiveEvents(1),
 		eventClick: (calEvent, jsEvent, view) ->
 			if calEvent.name == gon.user || gon.admin
 				id = calEvent.id
@@ -168,7 +171,6 @@ $(document).ready ->
 	tabOnClick = (e) ->
 		c = $('.calendar')
 		c.fullCalendar('removeEvents')
-		console.log(getActiveEvents(e.target.parentNode.value))
 		c.fullCalendar('addEventSource', getActiveEvents(e.target.parentNode.value))
 		c.fullCalendar('rerenderEvents')
 
