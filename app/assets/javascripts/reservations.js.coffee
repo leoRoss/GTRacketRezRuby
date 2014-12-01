@@ -59,7 +59,7 @@ $(document).ready ->
 			$('#reservationModal').modal('show')
 		events: eventList
 		eventClick: (calEvent, jsEvent, view) ->
-			if calEvent.name == gon.user || gon.user == "Billy Smith" #Billy Smith is the admin user
+			if calEvent.name == gon.user || gon.admin
 				id = calEvent.id
 				start = calEvent.start
 				end = calEvent.end
@@ -132,16 +132,26 @@ $(document).ready ->
 			textColor: "black"
 		}, true)
 
-		params =
-			reservation:
-				id: id
-				name: gon.user
-				phone: current_phone
-				start: startTime.toISOString(),
-				duration: duration,
-				court: $('#court').val(),
-				user_id: String(current_user),
-
+		if (gon.admin)
+			params =
+				reservation:
+					id: id
+					name: $('#name').val(),
+					phone: $('#phone').val(),
+					start: startTime.toISOString(),
+					duration: duration,
+					court: $('#court').val(),
+					user_id: String(current_user),
+		else
+			params =
+				reservation:
+					id: id
+					name: gon.user,
+					phone: current_phone,
+					start: startTime.toISOString(),
+					duration: duration,
+					court: $('#court').val(),
+					user_id: String(current_user),
 		$.ajax({
 				type: 'POST',
 				url: '/reservations',

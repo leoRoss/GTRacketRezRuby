@@ -7,6 +7,7 @@ class ReservationsController < ApplicationController
     gon.last = Reservation.last
     gon.reservations = @reservations
     gon.user = current_user.try(:name)
+    gon.admin = current_user.try(:admin)
   end
 
   def show
