@@ -98,17 +98,6 @@ ready = () ->
 		endTime = new Date(startTime)
 		endTime.setMinutes(startTime.getMinutes() + duration)
 
-		reservationInfo = {
-			name: gon.user
-			court: $('#court').val()
-			title: eventTitle,
-			start: startTime.toISOString(),
-			end: endTime.toISOString(),
-			allDay: false
-			color: "#58FA82"
-			textColor: "black"
-		}
-
 		if (gon.admin)
 			params =
 				reservation:
@@ -121,6 +110,7 @@ ready = () ->
 					guest1: $('#guest1 input').val(),
 					guest2: $('#guest2 input').val(),
 					guest3: $('#guest3 input').val(),
+			#myColor = "#6AA4C1"
 		else
 			params =
 				reservation:
@@ -133,13 +123,22 @@ ready = () ->
 					guest1: $('#guest1 input').val(),
 					guest2: $('#guest2 input').val(),
 					guest3: $('#guest3 input').val(),
-					
+			#myColor = "#58FA82"
 
-		$('#today').fullCalendar('renderEvent', reservationInfo, true)
-
-		$('#tomorrow').fullCalendar('renderEvent', reservationInfo, true)
-
-		$('#dayafter').fullCalendar('renderEvent', reservationInfo, true)
+		# reservationInfo = {
+		# 	name: params.reservation.name,
+		# 	phone: params.reservation.phone,
+		# 	title: eventTitle,
+		# 	start: startTime.toISOString(),
+		# 	end: endTime.toISOString(),
+		# 	allDay: false,
+		# 	color: myColor,
+		# 	textColor: "black",
+		# }
+		
+		# $('#today').fullCalendar('renderEvent', reservationInfo, true)
+		# $('#tomorrow').fullCalendar('renderEvent', reservationInfo, true)
+		# $('#dayafter').fullCalendar('renderEvent', reservationInfo, true)
 
 		$.ajax({
 				type: 'POST',
