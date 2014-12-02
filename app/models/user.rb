@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
 
   validates :phone, presence: true #length: { minimum: 5 }
   validates  :name, presence: true
-
+  validates_uniqueness_of :phone
 end
