@@ -41,6 +41,8 @@ ready = () ->
 					end: endTime.toISOString()
 					color: color
 					textColor: text
+					phone: reservation.phone
+					guests: reservation.guest1 + " - "+ reservation.guest2 + " - " +  reservation.guest3	
 				}
 
 				eventList.push(item)
@@ -70,6 +72,8 @@ ready = () ->
 				end = calEvent.end
 				name = calEvent.name
 				court = calEvent.court
+				phone = calEvent.phone
+				guests = calEvent.guests
 				$('#details').modal('show')
 				document.getElementById('res_desc').innerHTML='Reservation ID: ' + id
 				document.getElementById('name_desc').innerHTML='Name: ' + name
@@ -78,6 +82,8 @@ ready = () ->
 				document.getElementById('enddate_desc').innerHTML='End Date: ' + end.format('MM/DD/YY')
 				document.getElementById('start_desc').innerHTML='Start Time: ' + start.format('hh:mmA')
 				document.getElementById('end_desc').innerHTML='End Time: ' + end.format('hh:mmA')
+				document.getElementById('phone_desc').innerHTML='Phone: ' + phone
+				document.getElementById('guests_desc').innerHTML='Guests: ' + guests
 
 	$('#today').fullCalendar('gotoDate', moment())
 	$('#tomorrow').fullCalendar('gotoDate', moment().add(1, 'days'))
