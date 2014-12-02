@@ -20,7 +20,10 @@ ready = () ->
 				startTime = new Date(reservation.start)
 				endTime = new Date(startTime)
 				endTime.setMinutes(startTime.getMinutes() + reservation.duration)
-				description =  'Name: ' + reservation.name + "\nCourt: " + reservation.court
+				if gon.admin
+					description =  'Name: ' + reservation.name + "\nPhone: " + reservation.phone
+				else
+					description = ''
 
 				if reservation.name == gon.user
 					color = "#58FA82"
