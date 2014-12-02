@@ -2,11 +2,17 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
-	
+
+	newEvents = []
+
 	getActiveEvents = (activeTab) ->
 		eventList = []
 
-		for reservation in gon.reservations
+		for reservation in newEvents
+			if reservation.court == String(activeTab)
+				eventList.push(reservation)
+
+		for reservation in gon.reservations.concat(newEvents)
 			
 			if reservation.court == activeTab
 
@@ -98,6 +104,7 @@ $(document).ready ->
 			color: "#58FA82"
 			textColor: "black"
 		}
+		newEvents.push(reservationInfo)
 
 		if (gon.admin)
 			params =
