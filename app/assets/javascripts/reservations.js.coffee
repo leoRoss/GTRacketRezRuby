@@ -4,16 +4,10 @@
 
 ready = () ->
 	
-	newEvents = []
-
 	getActiveEvents = (activeTab) ->
 		eventList = []
 
-		for reservation in newEvents
-			if reservation.court == String(activeTab)
-				eventList.push(reservation)
-
-		for reservation in gon.reservations.concat(newEvents)
+		for reservation in gon.reservations
 			
 			if reservation.court == activeTab
 
@@ -114,7 +108,6 @@ ready = () ->
 			color: "#58FA82"
 			textColor: "black"
 		}
-		newEvents.push(reservationInfo)
 
 		if (gon.admin)
 			params =
@@ -159,6 +152,7 @@ ready = () ->
 		})
 		$('#reservationModal').modal('hide')
 		$('.calendar').fullCalendar('unselect')
+		window.location.reload()
 
 	confirmDelete = ->
 		$('#details').modal('hide')
@@ -176,6 +170,7 @@ ready = () ->
 		$('#delConfirm').modal('hide')
 
 		$('.calendar').fullCalendar('removeEvents', curr_id)
+		window.location.reload()
 
 	tabOnClick = (e) ->
 		c = $('.calendar')
